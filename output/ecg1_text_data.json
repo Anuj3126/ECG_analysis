@@ -1,0 +1,32 @@
+{
+  "patient": {
+    "name": "PAPPU",
+    "age": 39,
+    "gender": "Male",
+    "date": "2017-11-25",
+    "time": "09:43:46"
+  },
+  "parameters": {
+    "heart_rate_bpm": 105.0,
+    "pr_interval_ms": 146.0,
+    "qrs_duration_ms": 78.0,
+    "qt_interval_ms": 304.0,
+    "qtc_interval_ms": 383.0,
+    "p_axis_degrees": 64.0,
+    "qrs_axis_degrees": 59.0,
+    "t_axis_degrees": 85.0
+  },
+  "device_info": {
+    "speed": "25 mm/s",
+    "gain": "10 mm/mV",
+    "filters": "BOR 35 Hz"
+  },
+  "comments": [
+    "*** CONSIDER ACUTE STEMI ***",
+    "Sinus tachycardia",
+    "** ANTEROSEPTAL INFARCT - POSSIBLY ACUTE **",
+    "Abnormal ECG",
+    "Unconfirmed Diagnosis"
+  ],
+  "raw_text": "ID: 2017112509436568 Name: PAPPU Age: 39 Years Gender: Male 2017-11-25 09:43:46 Vent. Rate 105 bpm PR Interval 146 ms QRS Duration 78 ms QT/QTc Interval 304/383 ms P/QRS/T Axes 64/59/85 deg QTcHodges *** CONSIDER ACUTE STEMI *** Sinus tachycardia ** ANTEROSEPTAL INFARCT - POSSIBLY ACUTE ** Abnormal ECG Unconfirmed Diagnosis 25 mm/s 10 mm/mV 50 Hz BOR 35 Hz KEM CARDIOLOGY ICU2 Q2.03.00/V2.8.4.1 SN#FN-4CD01474"
+}

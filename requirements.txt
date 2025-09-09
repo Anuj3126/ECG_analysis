@@ -1,0 +1,18 @@
+# ECG Analysis System Requirements
+# Core dependencies
+openai>=1.0.0
+pydantic>=2.5.0
+python-dotenv>=1.0.0
+
+# Image processing
+pillow>=10.0.0
+opencv-python>=4.8.0
+
+# Signal processing
+numpy>=1.24.0
+scipy>=1.10.0
+matplotlib>=3.7.0
+
+# Development and testing
+pytest>=7.0.0
+pytest-cov>=4.0.0

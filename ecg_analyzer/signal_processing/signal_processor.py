@@ -76,18 +76,22 @@ class ImprovedSignalProcessor:
         }
     
     def extract_lead_regions_advanced(self, image: np.ndarray) -> Dict[str, np.ndarray]:
-        """Advanced lead region extraction with better detection."""
+        """Advanced lead region extraction with better detection and larger regions."""
         gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY) if len(image.shape) == 3 else image
         height, width = gray.shape
         
-        # Try to detect actual lead regions by finding text labels
-        # This is a more sophisticated approach
+        # Improved approach: Extract larger regions to capture more ECG data
+        # Assume 12 leads in 4 rows of 3 columns, but with better sizing
         
-        # For now, use improved grid-based approach
-        # Assume 12 leads in 4 rows of 3 columns
+        # Calculate better lead dimensions
+        # Leave more space for text labels and get larger signal areas
+        header_height = int(height * 0.15)  # Reserve 15% for header
+        footer_height = int(height * 0.1)   # Reserve 10% for footer
+        signal_height = height - header_height - footer_height
+        
         rows = 4
         cols = 3
-        lead_height = height // rows
+        lead_height = signal_height // rows
         lead_width = width // cols
         
         lead_names = ["I", "II", "III", "aVR", "aVL", "aVF", "V1", "V2", "V3", "V4", "V5", "V6"]
@@ -97,15 +101,16 @@ class ImprovedSignalProcessor:
             row = i // cols
             col = i % cols
             
-            y_start = row * lead_height
-            y_end = (row + 1) * lead_height
+            # Calculate lead region with better positioning
+            y_start = header_height + row * lead_height
+            y_end = header_height + (row + 1) * lead_height
             x_start = col * lead_width
             x_end = (col + 1) * lead_width
             
-            # Extract lead region with some padding
-            padding = 10
-            y_start = max(0, y_start - padding)
-            y_end = min(height, y_end + padding)
+            # Extract larger region with minimal padding to get more signal
+            padding = 5  # Reduced padding to get more signal
+            y_start = max(header_height, y_start - padding)
+            y_end = min(height - footer_height, y_end + padding)
             x_start = max(0, x_start - padding)
             x_end = min(width, x_end + padding)
             
@@ -115,11 +120,15 @@ class ImprovedSignalProcessor:
         return leads
     
     def trace_waveform_advanced(self, lead_image: np.ndarray, grid_calibration: Dict[str, float]) -> Tuple[List[float], List[float]]:
-        """Advanced waveform tracing with better line detection."""
+        """Advanced waveform tracing with improved line detection and longer signals."""
         
-        # Preprocess the image
+        # Preprocess the image with better techniques
         # Invert colors to make ECG traces white on black background
         processed = 255 - lead_image
+        
+        # Apply adaptive thresholding for better trace detection
+        processed = cv2.adaptiveThreshold(processed, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, 
+                                        cv2.THRESH_BINARY, 11, 2)
         
         # Apply morphological operations to enhance the trace
         kernel = np.ones((2, 2), np.uint8)
@@ -128,25 +137,43 @@ class ImprovedSignalProcessor:
         # Apply Gaussian blur to smooth
         processed = cv2.GaussianBlur(processed, (3, 3), 0)
         
-        # Threshold to get binary image
-        _, binary = cv2.threshold(processed, 30, 255, cv2.THRESH_BINARY)
+        # Use multiple approaches to find the waveform
+        # Approach 1: Find contours
+        contours, _ = cv2.findContours(processed, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
         
-        # Use skeletonization to get thin lines
-        kernel = np.ones((3, 3), np.uint8)
-        skeleton = cv2.morphologyEx(binary, cv2.MORPH_OPEN, kernel)
+        # Approach 2: Find horizontal lines (ECG traces are mostly horizontal)
+        horizontal_kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (25, 1))
+        horizontal_lines = cv2.morphologyEx(processed, cv2.MORPH_OPEN, horizontal_kernel)
         
-        # Find contours
-        contours, _ = cv2.findContours(skeleton, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+        # Combine both approaches
+        combined = cv2.bitwise_or(processed, horizontal_lines)
         
-        if not contours:
-            # Fallback: create a baseline signal
-            return self._create_baseline_signal(lead_image, grid_calibration)
+        # Find the main trace using multiple methods
+        best_trace = None
+        best_score = 0
         
-        # Find the main waveform contour (longest)
-        main_contour = max(contours, key=cv2.contourArea)
+        # Method 1: Largest contour
+        if contours:
+            largest_contour = max(contours, key=cv2.contourArea)
+            if cv2.contourArea(largest_contour) > 50:  # Minimum area threshold
+                best_trace = largest_contour
+                best_score = cv2.contourArea(largest_contour)
+        
+        # Method 2: Horizontal line detection
+        h_contours, _ = cv2.findContours(horizontal_lines, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+        if h_contours:
+            for contour in h_contours:
+                area = cv2.contourArea(contour)
+                if area > best_score and area > 100:  # Prefer longer traces
+                    best_trace = contour
+                    best_score = area
+        
+        if best_trace is None:
+            # Fallback: create a longer baseline signal
+            return self._create_extended_baseline_signal(lead_image, grid_calibration)
         
         # Extract points and sort by x-coordinate
-        points = main_contour.reshape(-1, 2)
+        points = best_trace.reshape(-1, 2)
         sorted_indices = np.argsort(points[:, 0])
         sorted_points = points[sorted_indices]
         
@@ -161,7 +188,7 @@ class ImprovedSignalProcessor:
                 unique_y.append(y)
         
         if len(unique_x) < 2:
-            return self._create_baseline_signal(lead_image, grid_calibration)
+            return self._create_extended_baseline_signal(lead_image, grid_calibration)
         
         # Convert to time-voltage arrays
         time_array = []
@@ -178,7 +205,7 @@ class ImprovedSignalProcessor:
             time_array.append(float(time_sec))
             voltage_array.append(float(voltage_mv))
         
-        # Interpolate to regular time intervals
+        # Interpolate to regular time intervals with higher sampling
         if len(time_array) > 1:
             time_array, voltage_array = self._interpolate_signal_advanced(time_array, voltage_array)
         
@@ -192,6 +219,23 @@ class ImprovedSignalProcessor:
         
         for x in range(0, width, 2):  # Sample every 2 pixels
             time_sec = x * grid_calibration["ms_per_pixel"] / 1000.0
+            time_array.append(time_sec)
+            voltage_array.append(0.0)  # Baseline
+        
+        return time_array, voltage_array
+    
+    def _create_extended_baseline_signal(self, lead_image: np.ndarray, grid_calibration: Dict[str, float]) -> Tuple[List[float], List[float]]:
+        """Create an extended baseline signal with realistic ECG duration."""
+        width = lead_image.shape[1]
+        time_array = []
+        voltage_array = []
+        
+        # Create a longer signal (at least 2-3 seconds for proper ECG analysis)
+        target_duration = 3.0  # 3 seconds
+        num_samples = int(target_duration * self.sampling_rate_hz)
+        
+        for i in range(num_samples):
+            time_sec = i / self.sampling_rate_hz
             time_array.append(time_sec)
             voltage_array.append(0.0)  # Baseline
         

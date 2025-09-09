@@ -99,12 +99,36 @@ class SignalInterpreter:
         return float(noise_ratio)
     
     def _analyze_rhythm(self, voltage_array: np.ndarray, time_array: np.ndarray) -> Dict[str, any]:
-        """Analyze rhythm characteristics."""
+        """Analyze rhythm characteristics with improved QRS detection."""
         if len(voltage_array) < 50:
             return {"error": "Insufficient data for rhythm analysis"}
         
-        # Find peaks (QRS complexes)
-        peaks, properties = signal.find_peaks(voltage_array, height=np.mean(voltage_array) + np.std(voltage_array))
+        # Improved QRS detection using multiple criteria
+        # 1. Find peaks with appropriate height threshold
+        mean_voltage = np.mean(voltage_array)
+        std_voltage = np.std(voltage_array)
+        
+        # Use more conservative threshold for QRS detection
+        height_threshold = mean_voltage + 0.5 * std_voltage
+        
+        # 2. Find peaks with distance constraint (minimum RR interval)
+        min_rr_seconds = 0.3  # Minimum 300ms between beats (max HR ~200 bpm)
+        min_distance = int(min_rr_seconds * len(voltage_array) / (time_array[-1] - time_array[0]))
+        
+        peaks, properties = signal.find_peaks(
+            voltage_array, 
+            height=height_threshold,
+            distance=min_distance,
+            prominence=std_voltage * 0.3  # Minimum prominence
+        )
+        
+        if len(peaks) < 2:
+            # Try with lower threshold if no peaks found
+            peaks, properties = signal.find_peaks(
+                voltage_array, 
+                height=mean_voltage + 0.2 * std_voltage,
+                distance=min_distance
+            )
         
         if len(peaks) < 2:
             return {"error": "No clear QRS complexes detected"}
@@ -113,9 +137,15 @@ class SignalInterpreter:
         peak_times = time_array[peaks]
         rr_intervals = np.diff(peak_times)
         
+        # Filter out unrealistic RR intervals (too short or too long)
+        realistic_rr = rr_intervals[(rr_intervals >= 0.3) & (rr_intervals <= 2.0)]  # 30-200 bpm
+        
+        if len(realistic_rr) < 1:
+            return {"error": "No realistic RR intervals found"}
+        
         # Rhythm analysis
-        mean_rr = np.mean(rr_intervals)
-        std_rr = np.std(rr_intervals)
+        mean_rr = np.mean(realistic_rr)
+        std_rr = np.std(realistic_rr)
         heart_rate = 60.0 / mean_rr if mean_rr > 0 else 0
         
         # Regularity assessment
@@ -134,7 +164,8 @@ class SignalInterpreter:
             "std_rr_interval_ms": float(std_rr * 1000),
             "heart_rate_bpm": float(heart_rate),
             "regularity": regularity,
-            "coefficient_of_variation": float(cv_rr)
+            "coefficient_of_variation": float(cv_rr),
+            "realistic_intervals": len(realistic_rr)
         }
     
     def _analyze_waveforms(self, voltage_array: np.ndarray, time_array: np.ndarray) -> Dict[str, any]:
@@ -166,9 +197,10 @@ class SignalInterpreter:
         return waveform_analysis
     
     def _interpret_clinically(self, lead_name: str, voltage_array: np.ndarray, time_array: np.ndarray) -> Dict[str, any]:
-        """Provide clinical interpretation for the lead."""
+        """Provide clinical interpretation for the lead with improved accuracy."""
         voltage_range = np.max(voltage_array) - np.min(voltage_array)
         mean_voltage = np.mean(voltage_array)
+        duration = time_array[-1] - time_array[0] if len(time_array) > 1 else 0
         
         interpretation = {
             "lead_name": lead_name,
@@ -178,44 +210,62 @@ class SignalInterpreter:
             "abnormalities": []
         }
         
-        # Amplitude assessment
-        if voltage_range < 0.5:
-            interpretation["amplitude_assessment"] = "Low voltage"
+        # Only interpret if we have sufficient data
+        if duration < 0.5:  # Less than 500ms is too short for reliable interpretation
+            interpretation["amplitude_assessment"] = "Insufficient data"
+            interpretation["morphology_assessment"] = "Insufficient data"
+            interpretation["clinical_significance"] = "Insufficient data for interpretation"
+            return interpretation
+        
+        # More conservative amplitude assessment
+        if voltage_range < 0.3:
+            interpretation["amplitude_assessment"] = "Very low voltage"
             interpretation["abnormalities"].append("Low voltage complex")
-        elif voltage_range > 5.0:
+        elif voltage_range < 0.8:
+            interpretation["amplitude_assessment"] = "Low voltage"
+        elif voltage_range > 8.0:  # More conservative threshold
             interpretation["amplitude_assessment"] = "High voltage"
             if lead_name in ["V1", "V2", "V3", "V4", "V5", "V6"]:
                 interpretation["abnormalities"].append("Possible left ventricular hypertrophy")
         else:
             interpretation["amplitude_assessment"] = "Normal voltage"
         
-        # Lead-specific interpretations
+        # Lead-specific interpretations (more conservative)
         if lead_name == "aVR":
-            if mean_voltage > 0:
+            if mean_voltage > 0.5:  # More conservative threshold
                 interpretation["abnormalities"].append("Positive aVR - possible dextrocardia or lead reversal")
         elif lead_name in ["V1", "V2"]:
-            if voltage_range > 3.0:
+            if voltage_range > 5.0:  # More conservative threshold
                 interpretation["abnormalities"].append("High voltage in precordial leads")
         elif lead_name in ["V4", "V5", "V6"]:
-            if voltage_range > 4.0:
+            if voltage_range > 6.0:  # More conservative threshold
                 interpretation["abnormalities"].append("High voltage in lateral leads")
         
-        # Morphology assessment
-        if len(voltage_array) > 50:
-            # Check for ST elevation/depression (simplified)
-            baseline = np.mean(voltage_array[:10]) if len(voltage_array) > 10 else np.mean(voltage_array)
-            st_segment = np.mean(voltage_array[len(voltage_array)//2:]) if len(voltage_array) > 20 else baseline
+        # More sophisticated ST segment analysis
+        if len(voltage_array) > 100 and duration > 1.0:  # Need sufficient data
+            # Find baseline (first 20% of signal)
+            baseline_start = int(len(voltage_array) * 0.1)
+            baseline_end = int(len(voltage_array) * 0.2)
+            baseline = np.mean(voltage_array[baseline_start:baseline_end])
+            
+            # Find ST segment (middle 60-80% of signal)
+            st_start = int(len(voltage_array) * 0.6)
+            st_end = int(len(voltage_array) * 0.8)
+            st_segment = np.mean(voltage_array[st_start:st_end])
             
             st_deviation = st_segment - baseline
             
-            if st_deviation > 0.5:
+            # More conservative ST deviation thresholds
+            if st_deviation > 1.0:  # 1mV threshold
                 interpretation["morphology_assessment"] = "ST elevation present"
                 interpretation["abnormalities"].append("ST elevation - possible myocardial infarction")
-            elif st_deviation < -0.5:
+            elif st_deviation < -1.0:  # 1mV threshold
                 interpretation["morphology_assessment"] = "ST depression present"
                 interpretation["abnormalities"].append("ST depression - possible ischemia")
             else:
                 interpretation["morphology_assessment"] = "Normal ST segment"
+        else:
+            interpretation["morphology_assessment"] = "Insufficient data for ST analysis"
         
         # Clinical significance
         if interpretation["abnormalities"]:

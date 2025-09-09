@@ -13,7 +13,8 @@ def create_output_directory(base_path: str = "output") -> str:
     return base_path
 
 def save_analysis(analysis: CompleteECGAnalysis, output_path: str, 
-                 include_signals: bool = True, include_plots: bool = True) -> dict:
+                 include_signals: bool = True, include_plots: bool = True, 
+                 include_interpretation: bool = True) -> dict:
     """Save ECG analysis to files."""
     
     # Create output directory
@@ -49,6 +50,14 @@ def save_analysis(analysis: CompleteECGAnalysis, output_path: str,
             processor = SignalProcessor()
             processor.save_signals_plot(analysis.signal_data, plot_path)
             saved_files['signal_plot'] = plot_path
+    
+    # Save signal interpretation if requested and available
+    if include_interpretation and analysis.analysis_metadata.get("signal_interpretation"):
+        interpretation_path = output_path.replace('.json', '_interpretation.json') if output_path.endswith('.json') else f"{output_path}_interpretation.json"
+        with open(interpretation_path, 'w') as f:
+            import json
+            json.dump(analysis.analysis_metadata["signal_interpretation"], f, indent=2, default=str)
+        saved_files['signal_interpretation'] = interpretation_path
     
     return saved_files
 

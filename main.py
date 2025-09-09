@@ -14,7 +14,8 @@ from ecg_analyzer import ECGAnalyzer
 from ecg_analyzer.utils import save_analysis, create_output_directory
 
 def analyze_ecg_images(image_paths: List[str], output_dir: str = "output", 
-                      extract_signals: bool = True, include_plots: bool = True):
+                      extract_signals: bool = True, include_plots: bool = True, 
+                      interpret_signals: bool = True):
     """Analyze multiple ECG images and save results."""
     
     print("ECG Analysis System")
@@ -22,6 +23,7 @@ def analyze_ecg_images(image_paths: List[str], output_dir: str = "output",
     print(f"Processing {len(image_paths)} ECG image(s)...")
     print(f"Output directory: {output_dir}")
     print(f"Signal extraction: {'Enabled' if extract_signals else 'Disabled'}")
+    print(f"Signal interpretation: {'Enabled' if interpret_signals else 'Disabled'}")
     print(f"Generate plots: {'Enabled' if include_plots else 'Disabled'}")
     print()
     
@@ -39,7 +41,7 @@ def analyze_ecg_images(image_paths: List[str], output_dir: str = "output",
         
         try:
             # Perform analysis
-            analysis = analyzer.analyze_ecg(image_path, extract_signals=extract_signals)
+            analysis = analyzer.analyze_ecg(image_path, extract_signals=extract_signals, interpret_signals=interpret_signals)
             
             # Display results summary
             print(f"Patient: {analysis.text_data.patient.name} ({analysis.text_data.patient.age}y, {analysis.text_data.patient.gender})")
@@ -54,6 +56,16 @@ def analyze_ecg_images(image_paths: List[str], output_dir: str = "output",
             if analysis.signal_data.leads:
                 print(f"Signals: {len(analysis.signal_data.leads)} leads extracted")
             
+            # Display signal interpretation results
+            if analysis.analysis_metadata.get("signal_interpretation"):
+                interpretation = analysis.analysis_metadata["signal_interpretation"]
+                overall = interpretation.get("overall_interpretation", {})
+                print(f"Signal Analysis: {overall.get('overall_assessment', 'N/A')}")
+                if overall.get("unique_abnormalities"):
+                    print("Signal Abnormalities:")
+                    for abnormality in overall["unique_abnormalities"][:3]:  # Show first 3
+                        print(f"  • {abnormality}")
+            
             # Save results
             base_name = f"ecg_{i}_{os.path.splitext(os.path.basename(image_path))[0]}"
             output_path = os.path.join(output_dir, f"{base_name}.json")
@@ -62,7 +74,8 @@ def analyze_ecg_images(image_paths: List[str], output_dir: str = "output",
                 analysis, 
                 output_path, 
                 include_signals=extract_signals,
-                include_plots=include_plots
+                include_plots=include_plots,
+                include_interpretation=interpret_signals
             )
             
             print(f"Saved files:")
@@ -111,7 +124,8 @@ def main():
         image_paths=existing_images,
         output_dir="output",
         extract_signals=True,
-        include_plots=True
+        include_plots=True,
+        interpret_signals=True
     )
     
     return results

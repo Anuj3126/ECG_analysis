@@ -1,0 +1,684 @@
+{
+  "individual_leads": {
+    "I": {
+      "lead_name": "I",
+      "duration_seconds": 0.5126020816653325,
+      "sampling_rate_hz": 500.0,
+      "num_points": 256,
+      "voltage_range_mv": 0.8108484984361932,
+      "max_voltage_mv": 3.8594377939449767,
+      "min_voltage_mv": 3.0485892955087834,
+      "mean_voltage_mv": 3.3156362979598315,
+      "std_voltage_mv": 0.23789356632671266,
+      "signal_quality": "Fair - Low amplitude",
+      "baseline_drift": 0.0017689298490242012,
+      "noise_level": 2.382047546766216e-05,
+      "rhythm_analysis": {
+        "num_qrs_complexes": 4,
+        "mean_rr_interval_ms": 62.31633149656979,
+        "std_rr_interval_ms": 38.59731739296005,
+        "heart_rate_bpm": 962.8294631448694,
+        "regularity": "Irregular",
+        "coefficient_of_variation": 0.6193772397382642
+      },
+      "waveform_analysis": {
+        "num_peaks": 5,
+        "num_valleys": 10,
+        "peak_amplitudes": [
+          3.457771908575849,
+          3.814456131905396,
+          3.5792349300299793,
+          3.8594377939449767,
+          3.6388350739845787
+        ],
+        "valley_amplitudes": [
+          3.090378351653014,
+          3.0534084893987363,
+          3.0485892955087834,
+          3.053493187576015,
+          3.0607211075879173,
+          3.1066449643857856,
+          3.094962234476546,
+          3.158614514932302,
+          3.093406442847372,
+          3.078425886132957
+        ],
+        "max_qrs_amplitude_mv": 3.8594377939449767,
+        "estimated_qrs_width_ms": 367.52602081665333
+      },
+      "clinical_interpretation": {
+        "lead_name": "I",
+        "amplitude_assessment": "Normal voltage",
+        "morphology_assessment": "Normal ST segment",
+        "clinical_significance": "Normal morphology",
+        "abnormalities": []
+      }
+    },
+    "II": {
+      "lead_name": "II",
+      "duration_seconds": 0.5416172938350682,
+      "sampling_rate_hz": 500.0,
+      "num_points": 270,
+      "voltage_range_mv": 1.0171695110257164,
+      "max_voltage_mv": 3.0572855383133537,
+      "min_voltage_mv": 2.0401160272876373,
+      "mean_voltage_mv": 2.535221375612124,
+      "std_voltage_mv": 0.25588175733246765,
+      "signal_quality": "Good - Normal amplitude",
+      "baseline_drift": 0.00024962571224856076,
+      "noise_level": 0.0003931630561306472,
+      "rhythm_analysis": {
+        "num_qrs_complexes": 9,
+        "mean_rr_interval_ms": 59.90005387209397,
+        "std_rr_interval_ms": 33.71772671574068,
+        "heart_rate_bpm": 1001.6685482139874,
+        "regularity": "Irregular",
+        "coefficient_of_variation": 0.562899772807199
+      },
+      "waveform_analysis": {
+        "num_peaks": 13,
+        "num_valleys": 14,
+        "peak_amplitudes": [
+          2.6934414805052707,
+          2.96014959068491,
+          2.9863494519738327,
+          2.984160340203265,
+          2.690561371753067,
+          2.961897268594006,
+          2.725096964212872,
+          2.7366880429507203,
+          3.039943778659114,
+          2.9929256130271717,
+          3.0572855383133537,
+          2.9317131637905978,
+          2.816400599469042
+        ],
+        "valley_amplitudes": [
+          2.2908445871138876,
+          2.309772427272104,
+          2.0568564976980155,
+          2.0401160272876373,
+          2.209790788737807,
+          2.3596665531169707,
+          2.2508707354023474,
+          2.253583579403926,
+          2.10984870973996,
+          2.16586177210596,
+          2.2063169998618632,
+          2.3490540527651933,
+          2.194324776132234,
+          2.210739322831227
+        ],
+        "max_qrs_amplitude_mv": 3.0572855383133537,
+        "estimated_qrs_width_ms": 41.6628687565437
+      },
+      "clinical_interpretation": {
+        "lead_name": "II",
+        "amplitude_assessment": "Normal voltage",
+        "morphology_assessment": "Normal ST segment",
+        "clinical_significance": "Normal morphology",
+        "abnormalities": []
+      }
+    },
+    "III": {
+      "lead_name": "III",
+      "duration_seconds": 0.706036829463571,
+      "sampling_rate_hz": 500.0,
+      "num_points": 353,
+      "voltage_range_mv": 0.5828731808447618,
+      "max_voltage_mv": 1.6456656543802812,
+      "min_voltage_mv": 1.0627924735355194,
+      "mean_voltage_mv": 1.3672289294504216,
+      "std_voltage_mv": 0.13803928074171834,
+      "signal_quality": "Fair - Low amplitude",
+      "baseline_drift": 0.00012501315767864137,
+      "noise_level": 0.00010704020323500313,
+      "rhythm_analysis": {
+        "num_qrs_complexes": 5,
+        "mean_rr_interval_ms": 159.4600225635054,
+        "std_rr_interval_ms": 102.72192286219948,
+        "heart_rate_bpm": 376.2698577074692,
+        "regularity": "Irregular",
+        "coefficient_of_variation": 0.6441860549799571
+      },
+      "waveform_analysis": {
+        "num_peaks": 12,
+        "num_valleys": 11,
+        "peak_amplitudes": [
+          1.5497191129350028,
+          1.5918274528334628,
+          1.4369471630176522,
+          1.5081967976436252,
+          1.4609027533900605,
+          1.4621738782229219,
+          1.489361229541067,
+          1.6456656543802812,
+          1.4648892998841185,
+          1.43647442370448,
+          1.4571169866803966,
+          1.60550679684932
+        ],
+        "valley_amplitudes": [
+          1.1779615694062924,
+          1.1940265105304948,
+          1.1770743357432836,
+          1.156794930660069,
+          1.085642400151519,
+          1.0627924735355194,
+          1.2117781836738504,
+          1.1758011090951217,
+          1.1531101012392777,
+          1.1769328242291357,
+          1.159443761034658
+        ],
+        "max_qrs_amplitude_mv": 1.6456656543802812,
+        "estimated_qrs_width_ms": 188.59887910328268
+      },
+      "clinical_interpretation": {
+        "lead_name": "III",
+        "amplitude_assessment": "Normal voltage",
+        "morphology_assessment": "Normal ST segment",
+        "clinical_significance": "Normal morphology",
+        "abnormalities": []
+      }
+    },
+    "aVR": {
+      "lead_name": "aVR",
+      "duration_seconds": 0.183763010408327,
+      "sampling_rate_hz": 500.0,
+      "num_points": 91,
+      "voltage_range_mv": 1.2250124981618047,
+      "max_voltage_mv": -1.9812862584889914,
+      "min_voltage_mv": -3.206298756650796,
+      "mean_voltage_mv": -2.522202614585534,
+      "std_voltage_mv": 0.3662436956083878,
+      "signal_quality": "Good - Normal amplitude",
+      "baseline_drift": -0.006004595226899431,
+      "noise_level": 0.002168218014651537,
+      "rhythm_analysis": {
+        "num_qrs_complexes": 3,
+        "mean_rr_interval_ms": 57.170714349257246,
+        "std_rr_interval_ms": 12.250867360555251,
+        "heart_rate_bpm": 1049.4883732510073,
+        "regularity": "Irregular",
+        "coefficient_of_variation": 0.2142857142857165
+      },
+      "waveform_analysis": {
+        "num_peaks": 5,
+        "num_valleys": 5,
+        "peak_amplitudes": [
+          -2.091464399429605,
+          -1.9812862584889914,
+          -2.054701974473307,
+          -2.3235030432248607,
+          -2.1762361658801734
+        ],
+        "valley_amplitudes": [
+          -3.102272866294717,
+          -3.206298756650796,
+          -3.0806181950137703,
+          -3.007689793148524,
+          -3.0772757796122363
+        ],
+        "max_qrs_amplitude_mv": -1.9812862584889914,
+        "estimated_qrs_width_ms": 735.0520416333067
+      },
+      "clinical_interpretation": {
+        "lead_name": "aVR",
+        "amplitude_assessment": "Normal voltage",
+        "morphology_assessment": "Normal ST segment",
+        "clinical_significance": "Normal morphology",
+        "abnormalities": []
+      }
+    },
+    "aVL": {
+      "lead_name": "aVL",
+      "duration_seconds": 0.2514651721377099,
+      "sampling_rate_hz": 500.0,
+      "num_points": 125,
+      "voltage_range_mv": 1.4719626783926052,
+      "max_voltage_mv": -1.7431704669039743,
+      "min_voltage_mv": -3.2151331452965795,
+      "mean_voltage_mv": -2.675451055057137,
+      "std_voltage_mv": 0.41763156819584724,
+      "signal_quality": "Good - Normal amplitude",
+      "baseline_drift": 0.002735292083005992,
+      "noise_level": 0.0005930255693199218,
+      "rhythm_analysis": {
+        "num_qrs_complexes": 5,
+        "mean_rr_interval_ms": 42.079857434334514,
+        "std_rr_interval_ms": 14.996855050782044,
+        "heart_rate_bpm": 1425.8603440762558,
+        "regularity": "Irregular",
+        "coefficient_of_variation": 0.356390348379497
+      },
+      "waveform_analysis": {
+        "num_peaks": 5,
+        "num_valleys": 6,
+        "peak_amplitudes": [
+          -1.7431704669039743,
+          -1.9457621833691818,
+          -1.9645723060610556,
+          -2.161337165676645,
+          -2.2035132416570224
+        ],
+        "valley_amplitudes": [
+          -3.0637521026977215,
+          -3.194007939445577,
+          -3.1041215114918868,
+          -3.2151331452965795,
+          -3.058690132653364,
+          -3.1874410097275505
+        ],
+        "max_qrs_amplitude_mv": -1.7431704669039743,
+        "estimated_qrs_width_ms": 444.8999199359488
+      },
+      "clinical_interpretation": {
+        "lead_name": "aVL",
+        "amplitude_assessment": "Normal voltage",
+        "morphology_assessment": "Normal ST segment",
+        "clinical_significance": "Normal morphology",
+        "abnormalities": []
+      }
+    },
+    "aVF": {
+      "lead_name": "aVF",
+      "duration_seconds": 0.19343474779823877,
+      "sampling_rate_hz": 500.0,
+      "num_points": 96,
+      "voltage_range_mv": 2.16591823918589,
+      "max_voltage_mv": 3.835514018691589,
+      "min_voltage_mv": 1.669595779505699,
+      "mean_voltage_mv": 2.554169766218386,
+      "std_voltage_mv": 0.36666166161800395,
+      "signal_quality": "Good - Normal amplitude",
+      "baseline_drift": -0.001741479353854566,
+      "noise_level": 0.00017215181629611732,
+      "rhythm_analysis": {
+        "error": "No clear QRS complexes detected"
+      },
+      "waveform_analysis": {
+        "num_peaks": 2,
+        "num_valleys": 1,
+        "peak_amplitudes": [
+          2.8272194923131435,
+          3.835514018691589
+        ],
+        "valley_amplitudes": [
+          1.669595779505699
+        ],
+        "max_qrs_amplitude_mv": 3.835514018691589,
+        "estimated_qrs_width_ms": 1581.3290632506007
+      },
+      "clinical_interpretation": {
+        "lead_name": "aVF",
+        "amplitude_assessment": "Normal voltage",
+        "morphology_assessment": "Normal ST segment",
+        "clinical_significance": "Normal morphology",
+        "abnormalities": []
+      }
+    },
+    "V1": {
+      "lead_name": "V1",
+      "duration_seconds": 0.4642433947157727,
+      "sampling_rate_hz": 500.0,
+      "num_points": 232,
+      "voltage_range_mv": 1.1723612739122333,
+      "max_voltage_mv": 0.25643302803478196,
+      "min_voltage_mv": -0.9159282458774513,
+      "mean_voltage_mv": -0.47409635983853937,
+      "std_voltage_mv": 0.3941463873942767,
+      "signal_quality": "Good - Normal amplitude",
+      "baseline_drift": 0.0006198632250720049,
+      "noise_level": 0.0002965120050260309,
+      "rhythm_analysis": {
+        "error": "No clear QRS complexes detected"
+      },
+      "waveform_analysis": {
+        "num_peaks": 1,
+        "num_valleys": 6,
+        "peak_amplitudes": [
+          0.25643302803478196
+        ],
+        "valley_amplitudes": [
+          -0.8449467918715788,
+          -0.7950835326208463,
+          -0.9079559420203105,
+          -0.815114705877603,
+          -0.812529379810213,
+          -0.9159282458774513
+        ],
+        "max_qrs_amplitude_mv": 0.25643302803478196,
+        "estimated_qrs_width_ms": 3549.5276220976784
+      },
+      "clinical_interpretation": {
+        "lead_name": "V1",
+        "amplitude_assessment": "Normal voltage",
+        "morphology_assessment": "Normal ST segment",
+        "clinical_significance": "Normal morphology",
+        "abnormalities": []
+      }
+    },
+    "V2": {
+      "lead_name": "V2",
+      "duration_seconds": 1.015532425940753,
+      "sampling_rate_hz": 500.0,
+      "num_points": 507,
+      "voltage_range_mv": 2.3177321763443968,
+      "max_voltage_mv": 1.2004531506647134,
+      "min_voltage_mv": -1.1172790256796834,
+      "mean_voltage_mv": -0.6487220733256698,
+      "std_voltage_mv": 0.417764737294503,
+      "signal_quality": "Good - Normal amplitude",
+      "baseline_drift": 0.0017830514969134675,
+      "noise_level": 0.0018871110458106844,
+      "rhythm_analysis": {
+        "num_qrs_complexes": 6,
+        "mean_rr_interval_ms": 34.92147077345668,
+        "std_rr_interval_ms": 15.78258069791583,
+        "heart_rate_bpm": 1718.1406931349854,
+        "regularity": "Irregular",
+        "coefficient_of_variation": 0.4519449023295991
+      },
+      "waveform_analysis": {
+        "num_peaks": 6,
+        "num_valleys": 11,
+        "peak_amplitudes": [
+          0.1876031043172621,
+          0.1351542944176679,
+          1.2004531506647134,
+          0.13551735084688765,
+          -0.0846735477480556,
+          0.03379640783514476
+        ],
+        "valley_amplitudes": [
+          -0.8952873104371767,
+          -1.076796511034235,
+          -1.1172790256796834,
+          -0.9239312560248187,
+          -0.9108366062072198,
+          -0.8760671495531347,
+          -0.9117632677682074,
+          -0.9846330949968749,
+          -0.9522261400214677,
+          -0.8896840762513962,
+          -0.8878171879955576
+        ],
+        "max_qrs_amplitude_mv": 1.2004531506647134,
+        "estimated_qrs_width_ms": 372.3618895116093
+      },
+      "clinical_interpretation": {
+        "lead_name": "V2",
+        "amplitude_assessment": "Normal voltage",
+        "morphology_assessment": "Normal ST segment",
+        "clinical_significance": "Normal morphology",
+        "abnormalities": []
+      }
+    },
+    "V3": {
+      "lead_name": "V3",
+      "duration_seconds": 1.2476541232986391,
+      "sampling_rate_hz": 500.0,
+      "num_points": 623,
+      "voltage_range_mv": 3.932489697218746,
+      "max_voltage_mv": 2.5163053703729785,
+      "min_voltage_mv": -1.4161843268457677,
+      "mean_voltage_mv": -0.692898864346302,
+      "std_voltage_mv": 0.4381424159285223,
+      "signal_quality": "Good - Normal amplitude",
+      "baseline_drift": -0.0006594775710493736,
+      "noise_level": 0.003619355726324411,
+      "rhythm_analysis": {
+        "num_qrs_complexes": 3,
+        "mean_rr_interval_ms": 456.33651615826426,
+        "std_rr_interval_ms": 426.24839421376333,
+        "heart_rate_bpm": 131.48191712799752,
+        "regularity": "Irregular",
+        "coefficient_of_variation": 0.9340659340659341
+      },
+      "waveform_analysis": {
+        "num_peaks": 3,
+        "num_valleys": 4,
+        "peak_amplitudes": [
+          2.5163053703729785,
+          1.7924284445321323,
+          0.33725872065269114
+        ],
+        "valley_amplitudes": [
+          -0.9195486527661568,
+          -0.9638989181038903,
+          -0.9358286093422147,
+          -1.4161843268457677
+        ],
+        "max_qrs_amplitude_mv": 2.5163053703729785,
+        "estimated_qrs_width_ms": 567.4085935415
+      },
+      "clinical_interpretation": {
+        "lead_name": "V3",
+        "amplitude_assessment": "Normal voltage",
+        "morphology_assessment": "ST depression present",
+        "clinical_significance": "Abnormal - requires clinical correlation",
+        "abnormalities": [
+          "ST depression - possible ischemia"
+        ]
+      }
+    },
+    "V4": {
+      "lead_name": "V4",
+      "duration_seconds": 0.5512890312249801,
+      "sampling_rate_hz": 500.0,
+      "num_points": 275,
+      "voltage_range_mv": 5.958951524386909,
+      "max_voltage_mv": -1.0703235696556102,
+      "min_voltage_mv": -7.029275094042519,
+      "mean_voltage_mv": -2.860329165502145,
+      "std_voltage_mv": 1.7328629131356976,
+      "signal_quality": "Very Good - High amplitude",
+      "baseline_drift": 0.010490147084036198,
+      "noise_level": 2.5879916767634498e-05,
+      "rhythm_analysis": {
+        "num_qrs_complexes": 2,
+        "mean_rr_interval_ms": 191.1403575415076,
+        "std_rr_interval_ms": 0.0,
+        "heart_rate_bpm": 313.9054502760912,
+        "regularity": "Regular",
+        "coefficient_of_variation": 0.0
+      },
+      "waveform_analysis": {
+        "num_peaks": 7,
+        "num_valleys": 1,
+        "peak_amplitudes": [
+          -1.0898941640125546,
+          -1.0703235696556102,
+          -1.2443476487223193,
+          -1.6859111209445623,
+          -1.7291208508658165,
+          -1.8836631486875461,
+          -1.5534919438893093
+        ],
+        "valley_amplitudes": [
+          -7.029275094042519
+        ],
+        "max_qrs_amplitude_mv": -1.0703235696556102,
+        "estimated_qrs_width_ms": 197.57977810820083
+      },
+      "clinical_interpretation": {
+        "lead_name": "V4",
+        "amplitude_assessment": "High voltage",
+        "morphology_assessment": "ST depression present",
+        "clinical_significance": "Abnormal - requires clinical correlation",
+        "abnormalities": [
+          "Possible left ventricular hypertrophy",
+          "High voltage in lateral leads",
+          "ST depression - possible ischemia"
+        ]
+      }
+    },
+    "V5": {
+      "lead_name": "V5",
+      "duration_seconds": 0.8027542033626904,
+      "sampling_rate_hz": 500.0,
+      "num_points": 401,
+      "voltage_range_mv": 0.55100577228466,
+      "max_voltage_mv": -1.4267610027813815,
+      "min_voltage_mv": -1.9777667750660415,
+      "mean_voltage_mv": -1.7452356408947278,
+      "std_voltage_mv": 0.1391117384099208,
+      "signal_quality": "Fair - Low amplitude",
+      "baseline_drift": 0.00013337701026525426,
+      "noise_level": 9.974996308972381e-05,
+      "rhythm_analysis": {
+        "num_qrs_complexes": 15,
+        "mean_rr_interval_ms": 50.60218460482673,
+        "std_rr_interval_ms": 29.58446203306488,
+        "heart_rate_bpm": 1185.7195587219144,
+        "regularity": "Irregular",
+        "coefficient_of_variation": 0.5846479211145152
+      },
+      "waveform_analysis": {
+        "num_peaks": 15,
+        "num_valleys": 18,
+        "peak_amplitudes": [
+          -1.5815116842861534,
+          -1.5469555543299047,
+          -1.5385646086085394,
+          -1.5471488442990247,
+          -1.5214392041190787,
+          -1.532899956105316,
+          -1.5628111380440497,
+          -1.4463083219425068,
+          -1.4267610027813815,
+          -1.5782581492871306,
+          -1.5621071013489916,
+          -1.5200176405059207,
+          -1.525210636895922,
+          -1.5089311800788185,
+          -1.525037549530573
+        ],
+        "valley_amplitudes": [
+          -1.8887668875747945,
+          -1.883657313076756,
+          -1.8808689417490219,
+          -1.9356248501659417,
+          -1.8973358430393052,
+          -1.946102177407526,
+          -1.9258013312554922,
+          -1.9541687335875455,
+          -1.9261987150040987,
+          -1.8591314421954757,
+          -1.950987416952807,
+          -1.917406700791761,
+          -1.8810742076529892,
+          -1.8605545694345966,
+          -1.862532913761209,
+          -1.9777667750660415,
+          -1.8571091722962696,
+          -1.8636221984995682
+        ],
+        "max_qrs_amplitude_mv": -1.4267610027813815,
+        "estimated_qrs_width_ms": 173.446490525754
+      },
+      "clinical_interpretation": {
+        "lead_name": "V5",
+        "amplitude_assessment": "Normal voltage",
+        "morphology_assessment": "Normal ST segment",
+        "clinical_significance": "Normal morphology",
+        "abnormalities": []
+      }
+    },
+    "V6": {
+      "lead_name": "V6",
+      "duration_seconds": 0.715708566853483,
+      "sampling_rate_hz": 500.0,
+      "num_points": 357,
+      "voltage_range_mv": 0.7140381526222652,
+      "max_voltage_mv": -1.252915701994864,
+      "min_voltage_mv": -1.9669538546171292,
+      "mean_voltage_mv": -1.6728026470654744,
+      "std_voltage_mv": 0.14591183332165344,
+      "signal_quality": "Fair - Low amplitude",
+      "baseline_drift": -0.00033234655086458763,
+      "noise_level": 7.448612548398329e-05,
+      "rhythm_analysis": {
+        "num_qrs_complexes": 9,
+        "mean_rr_interval_ms": 78.65757774759136,
+        "std_rr_interval_ms": 31.297967093516746,
+        "heart_rate_bpm": 762.7999961114657,
+        "regularity": "Irregular",
+        "coefficient_of_variation": 0.39790148628718924
+      },
+      "waveform_analysis": {
+        "num_peaks": 9,
+        "num_valleys": 15,
+        "peak_amplitudes": [
+          -1.252915701994864,
+          -1.5117722627804695,
+          -1.4803036836985122,
+          -1.3836119483875486,
+          -1.3002998742551077,
+          -1.4441935710755078,
+          -1.4543504957217261,
+          -1.5160882447840762,
+          -1.4958197077651625
+        ],
+        "valley_amplitudes": [
+          -1.785231041618757,
+          -1.9506898987867258,
+          -1.8218514779817039,
+          -1.7867087847580447,
+          -1.8013632860432536,
+          -1.7608784584911514,
+          -1.7617900658171595,
+          -1.7884445935656292,
+          -1.7876397396497663,
+          -1.868552952091078,
+          -1.8702978527906637,
+          -1.7673696801316146,
+          -1.836719938252098,
+          -1.7569074587340523,
+          -1.9669538546171292
+        ],
+        "max_qrs_amplitude_mv": -1.252915701994864,
+        "estimated_qrs_width_ms": 323.46588381816565
+      },
+      "clinical_interpretation": {
+        "lead_name": "V6",
+        "amplitude_assessment": "Normal voltage",
+        "morphology_assessment": "Normal ST segment",
+        "clinical_significance": "Normal morphology",
+        "abnormalities": []
+      }
+    }
+  },
+  "overall_interpretation": {
+    "total_abnormalities": 3,
+    "unique_abnormalities": [
+      "Possible left ventricular hypertrophy",
+      "High voltage in lateral leads",
+      "ST depression - possible ischemia"
+    ],
+    "average_heart_rate_bpm": 892.8164201766043,
+    "heart_rate_range": "131.5-1718.1",
+    "signal_quality_distribution": {
+      "Fair - Low amplitude": 4,
+      "Good - Normal amplitude": 7,
+      "Very Good - High amplitude": 1
+    },
+    "overall_assessment": "Abnormal ECG - requires immediate attention"
+  },
+  "summary": {
+    "total_leads_analyzed": 12,
+    "successful_analyses": 12,
+    "failed_analyses": 0,
+    "key_findings": [
+      "V3: ST depression - possible ischemia",
+      "V4: Possible left ventricular hypertrophy",
+      "V4: High voltage in lateral leads",
+      "V4: ST depression - possible ischemia"
+    ],
+    "recommendations": [
+      "Clinical correlation recommended",
+      "Consider cardiology consultation"
+    ]
+  }
+}

@@ -24,11 +24,11 @@
     "serial_number": "4CD01474"
   },
   "comments": [
-    "*** CONSIDER ACUTE STEMI ***",
+    "CONSIDER ACUTE STEMI",
     "Sinus tachycardia",
-    "*** ANTEROSEPTAL INFARCT - POSSIBLY ACUTE ***",
+    "ANTEROSEPTAL INFARCT - POSSIBLY ACUTE",
     "Abnormal ECG",
     "Unconfirmed Diagnosis"
   ],
-  "raw_text": "ID: 2017112509436568\nName: PAPPU\nAge: 39 Years\nGender: Male\n2017-11-25 09:43:46\nVent. Rate 105 bpm\nPR Interval 146 ms\nQRS Duration 78 ms\nQT/QTc Interval 304/383 ms\nP/QRS/T Axes 64/59/85 deg\nQTcHodges\n*** CONSIDER ACUTE STEMI ***\nSinus tachycardia\n*** ANTEROSEPTAL INFARCT - POSSIBLY ACUTE ***\nAbnormal ECG\nUnconfirmed Diagnosis\n25 mm/s 10 mm/mV 50 Hz BOR 35 Hz\nKEM CARDIOLOGY ICU\nQ2.03.00/V2.8.4.1 SN#4CD01474"
+  "raw_text": "ID: 2017112509436568 Name: PAPPU Age: 39 Years Gender: Male 2017-11-25 09:43:46 Vent. Rate 105 bpm PR Interval 146 ms QRS Duration 78 ms QT/QTc Interval 304/383 ms P/QRS/T Axes 64/59/85 deg QTcHodges CONSIDER ACUTE STEMI Sinus tachycardia ANTEROSEPTAL INFARCT - POSSIBLY ACUTE Abnormal ECG Unconfirmed Diagnosis 25 mm/s 10 mm/mV 50 Hz BOR 35 Hz KEM CARDIOLOGY ICU2 Q2.03.00/V2.8.4.1 SN: 4CD01474"
 }

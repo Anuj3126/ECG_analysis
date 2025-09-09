@@ -31,6 +31,38 @@ class TextExtractor:
         with open(image_path, "rb") as image_file:
             return base64.b64encode(image_file.read()).decode('utf-8')
     
+    def correct_ocr_errors(self, text: str) -> str:
+        """Correct common OCR errors in extracted text."""
+        if not text:
+            return text
+        
+        # Common OCR corrections
+        corrections = {
+            # Numbers to letters (common in names)
+            '0': 'O',  # Zero to letter O
+            '1': 'I',  # One to letter I
+            '5': 'S',  # Five to letter S
+            '8': 'B',  # Eight to letter B
+            '3': 'E',  # Three to letter E
+            '6': 'G',  # Six to letter G
+            
+            # Letter to number corrections (less common but possible)
+            'O': '0',  # Letter O to zero (in IDs/numbers)
+            'I': '1',  # Letter I to one (in IDs/numbers)
+            'S': '5',  # Letter S to five (in IDs/numbers)
+            'B': '8',  # Letter B to eight (in IDs/numbers)
+            'E': '3',  # Letter E to three (in IDs/numbers)
+            'G': '6',  # Letter G to six (in IDs/numbers)
+        }
+        
+        # Apply corrections
+        corrected_text = text
+        for wrong, correct in corrections.items():
+            corrected_text = corrected_text.replace(wrong, correct)
+        
+        return corrected_text
+    
+    
     def extract_text_from_ecg(self, image_path: str) -> ECGTextData:
         """Extract all text from ECG image using OpenAI Vision API."""
         
@@ -43,8 +75,14 @@ class TextExtractor:
         
         Please extract ALL text information from this ECG image and return it in a structured JSON format.
         
+        CRITICAL FOR PATIENT NAMES: 
+        - Patient names are ALWAYS composed of LETTERS ONLY - never numbers
+        - Do not extract name as numbers from the image, it should be a string of characters only.
+        - Make sure each and every letter from the name is extracted properly as it is.
+        - Do not mix or interpret the letters as numbers or a different character or letter.
+        
         Look for and extract:
-        1. Patient information (name, age, gender, date, time)
+        1. Patient information (name, age, gender, date, time) - CONVERT NUMBERS TO LETTERS IN NAMES
         2. ECG parameters (heart rate, PR interval, QRS duration, QT interval, QTc interval, P/QRS/T axes)
         3. Device information (speed, gain, filters, device model, serial number)
         4. Any comments or interpretations
@@ -53,7 +91,7 @@ class TextExtractor:
         Return the data in this exact JSON format:
         {
             "patient": {
-                "name": "extracted name or null",
+                "name": "extracted name (Has only characters, no numbers) or null",
                 "age": extracted_age_or_null,
                 "gender": "extracted gender or null", 
                 "date": "extracted date or null",
@@ -80,7 +118,7 @@ class TextExtractor:
             "raw_text": "all visible text as a single string"
         }
         
-        Be very thorough and extract every piece of text you can see. If you can't find a specific value, use null.
+        Be very thorough and extract every piece of text you can see. Remember: patient names contain ONLY letters, never numbers. If you can't find a specific value, use null.
         """
         
         try:
@@ -125,7 +163,7 @@ class TextExtractor:
                 # Parse JSON
                 data = json.loads(json_text)
                 
-                # Create ECGTextData object
+                # Create ECGTextData object (no post-processing needed - prompt handles corrections)
                 return ECGTextData(
                     patient=PatientInfo(**data.get("patient", {})),
                     parameters=ECGParameters(**data.get("parameters", {})),

@@ -974,12 +974,12 @@
   "overall_interpretation": {
     "total_abnormalities": 6,
     "unique_abnormalities": [
-      "Possible left ventricular hypertrophy",
-      "High voltage in precordial leads",
-      "High voltage in lateral leads",
-      "ST elevation - possible myocardial infarction",
       "ST depression - possible ischemia",
-      "Positive aVR - possible dextrocardia or lead reversal"
+      "Positive aVR - possible dextrocardia or lead reversal",
+      "Possible left ventricular hypertrophy",
+      "ST elevation - possible myocardial infarction",
+      "High voltage in precordial leads",
+      "High voltage in lateral leads"
     ],
     "average_heart_rate_bpm": 89.64154127255932,
     "heart_rate_range": "58.4-137.8",

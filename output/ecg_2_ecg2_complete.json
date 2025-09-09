@@ -1,7 +1,7 @@
 {
   "text_data": {
     "patient": {
-      "name": "BHYHMA60",
+      "name": "BHYHMAO",
       "age": 47,
       "gender": "Male",
       "date": "2017-11-16",
@@ -21,7 +21,7 @@
       "speed": "25 mm/s",
       "gain": "10 mm/mV",
       "filters": "50 Hz, BDR 35 Hz",
-      "device_model": "02 C3.00/V28.4.1",
+      "device_model": "02 C3.00/V2.8.4.1",
       "serial_number": "4C001474"
     },
     "comments": [
@@ -30,7 +30,7 @@
       "Abnormal ECG",
       "Unconfirmed Diagnosis"
     ],
-    "raw_text": "ID: 2017111601060425\nName: BHYHMA60\nAge: 47\nGender: Male\n2017-11-16 10:05:54\nVent. Rate 73 bpm\nPR Interval 140 ms\nQRS Duration 74 ms\nQT/QTc Interval 418/441 ms\nP/QRS/T Axes 68/6/97 deg\nQTc: Hodges\nSinus rhythm\nAnterolateral T wave abnormality may be due to myocardial ischemia\nAbnormal ECG\nUnconfirmed Diagnosis\n25 mm/s 10 mm/mV 50 Hz BDR 35 Hz\nKEM CARDIOLOGY (CCU)\n02 C3.00/V28.4.1\nSN/FN 4C001474"
+    "raw_text": "ID: 2017111601060425 Name: BHYHMAO Age: 47 Gender: Male 2017-11-16 10:05:54 Vent. Rate 73 bpm Sinus rhythm PR Interval 140 ms QRS Duration 74 ms QT/QTc Interval 418/441 ms P/QRS/T Axes 68/6/97 deg Anterolateral T wave abnormality may be due to myocardial ischemia Abnormal ECG Unconfirmed Diagnosis QTc: Hodges 25 mm/s 10 mm/mV 50 Hz BDR 35 Hz KEM CARDIOLOGY (CCU) 02 C3.00/V2.8.4.1 SN/FN 4C001474"
   },
   "signal_data": {
     "leads": {
@@ -51304,12 +51304,12 @@
       "overall_interpretation": {
         "total_abnormalities": 6,
         "unique_abnormalities": [
-          "Possible left ventricular hypertrophy",
-          "High voltage in precordial leads",
-          "High voltage in lateral leads",
-          "ST elevation - possible myocardial infarction",
           "ST depression - possible ischemia",
-          "Positive aVR - possible dextrocardia or lead reversal"
+          "Positive aVR - possible dextrocardia or lead reversal",
+          "Possible left ventricular hypertrophy",
+          "ST elevation - possible myocardial infarction",
+          "High voltage in precordial leads",
+          "High voltage in lateral leads"
         ],
         "average_heart_rate_bpm": 89.64154127255932,
         "heart_rate_range": "58.4-137.8",
